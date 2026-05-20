@@ -1,0 +1,223 @@
+/**
+ * 面试通 - 主题样式变量
+ * 包含颜色、间距、圆角、字体等 SCSS 变量定义
+ */
+
+// ============================================
+// 主色调
+// ============================================
+
+/** 主色调 - 靛蓝色 */
+$primary: #4F46E5;
+
+/** 主色调浅色 - 用于悬停、高亮 */
+$primary-light: #818CF8;
+
+/** 主色调背景 - 用于浅色背景 */
+$primary-bg: #EEF2FF;
+
+// ============================================
+// 中性色
+// ============================================
+
+/** 页面背景色 */
+$bg: #F8FAFC;
+
+/** 卡片背景色 */
+$card: #FFFFFF;
+
+/** 主要文字颜色 */
+$text-primary: #1E293B;
+
+/** 次要文字颜色 */
+$text-secondary: #64748B;
+
+/** 辅助文字颜色 */
+$text-muted: #94A3B8;
+
+/** 边框颜色 */
+$border: #E2E8F0;
+
+// ============================================
+// 功能色
+// ============================================
+
+/** 成功色 - 绿色 */
+$success: #10B981;
+
+/** 警告色 - 橙色 */
+$warning: #F59E0B;
+
+/** 危险色 - 红色 */
+$danger: #EF4444;
+
+// ============================================
+// 技术栈颜色
+// ============================================
+
+/** JavaScript 黄色 */
+$js: #F7DF1E;
+
+/** TypeScript 蓝色 */
+$ts: #3178C6;
+
+/** React 青色 */
+$react: #61DAFB;
+
+/** Vue 绿色 */
+$vue: #42B883;
+
+// ============================================
+// 间距变量 (rpx 单位)
+// ============================================
+
+/** 超小间距 - 4rpx */
+$spacing-xs: 4rpx;
+
+/** 小间距 - 8rpx */
+$spacing-sm: 8rpx;
+
+/** 中间距 - 12rpx */
+$spacing-md: 12rpx;
+
+/** 大间距 - 16rpx */
+$spacing-lg: 16rpx;
+
+/** 超大间距 - 20rpx */
+$spacing-xl: 20rpx;
+
+/** 超超大间距 - 24rpx */
+$spacing-xxl: 24rpx;
+
+// ============================================
+// 圆角变量 (rpx 单位)
+// ============================================
+
+/** 小圆角 - 8rpx */
+$radius-sm: 8rpx;
+
+/** 中圆角 - 12rpx */
+$radius-md: 12rpx;
+
+/** 大圆角 - 16rpx */
+$radius-lg: 16rpx;
+
+/** 全圆角 - 9999rpx（用于胶囊、标签等） */
+$radius-full: 9999rpx;
+
+// ============================================
+// 字体大小变量 (rpx 单位)
+// ============================================
+
+/** 超小字体 - 24rpx */
+$font-xs: 24rpx;
+
+/** 小字体 - 26rpx */
+$font-sm: 26rpx;
+
+/** 中字体 - 28rpx */
+$font-md: 28rpx;
+
+/** 大字体 - 32rpx */
+$font-lg: 32rpx;
+
+/** 超大字体 - 36rpx */
+$font-xl: 36rpx;
+
+/** 超超大字体 - 40rpx */
+$font-xxl: 40rpx;
+
+/** 标题字体 - 48rpx */
+$font-title: 48rpx;
+
+// ============================================
+// 常用混合宏 (Mixins)
+// ============================================
+
+/** 卡片阴影效果 */
+@mixin card-shadow {
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+/** 卡片悬停阴影效果 */
+@mixin card-shadow-hover {
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+/** 弹性布局 - 水平垂直居中 */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/** 弹性布局 - 水平排列 */
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/** 弹性布局 - 垂直排列 */
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/** 文字省略 - 单行 */
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/** 文字省略 - 多行 */
+@mixin text-ellipsis-multi($lines: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+/** 安全区域底部适配 */
+@mixin safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// ============================================
+// 常用工具类
+// ============================================
+
+/** 页面容器 */
+.page-container {
+  min-height: 100vh;
+  background-color: $bg;
+  padding: $spacing-lg;
+}
+
+/** 卡片容器 */
+.card {
+  background-color: $card;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  @include card-shadow;
+}
+
+/** 分割线 */
+.divider {
+  height: 1rpx;
+  background-color: $border;
+  margin: $spacing-lg 0;
+}
+
+/** 空状态 */
+.empty-state {
+  @include flex-column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xxl * 2;
+  color: $text-muted;
+  font-size: $font-md;
+}

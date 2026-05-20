@@ -1,0 +1,137 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "面试通"
+      }
+    },
+    {
+      "path": "pages/scene/index",
+      "style": {
+        "navigationBarTitleText": "场景练习"
+      }
+    },
+    {
+      "path": "pages/algo/index",
+      "style": {
+        "navigationBarTitleText": "算法练习"
+      }
+    },
+    {
+      "path": "pages/profile/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages/sub-pages",
+      "pages": [
+        {
+          "path": "question-detail",
+          "style": {
+            "navigationBarTitleText": "题目详情"
+          }
+        },
+        {
+          "path": "question-list",
+          "style": {
+            "navigationBarTitleText": "题目列表"
+          }
+        },
+        {
+          "path": "daily-detail",
+          "style": {
+            "navigationBarTitleText": "每日推荐"
+          }
+        },
+        {
+          "path": "scene-detail",
+          "style": {
+            "navigationBarTitleText": "场景详情"
+          }
+        },
+        {
+          "path": "algo-detail",
+          "style": {
+            "navigationBarTitleText": "算法详情"
+          }
+        },
+        {
+          "path": "error-book",
+          "style": {
+            "navigationBarTitleText": "错题本"
+          }
+        },
+        {
+          "path": "favorites",
+          "style": {
+            "navigationBarTitleText": "我的收藏"
+          }
+        },
+        {
+          "path": "calendar",
+          "style": {
+            "navigationBarTitleText": "学习日历"
+          }
+        },
+        {
+          "path": "reminder-settings",
+          "style": {
+            "navigationBarTitleText": "提醒设置"
+          }
+        },
+        {
+          "path": "goal-settings",
+          "style": {
+            "navigationBarTitleText": "目标设置"
+          }
+        },
+        {
+          "path": "profile-settings",
+          "style": {
+            "navigationBarTitleText": "个人设置"
+          }
+        }
+      ]
+    }
+  ],
+  "tabBar": {
+    "color": "#64748B",
+    "selectedColor": "#4F46E5",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "基础",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/scene/index",
+        "text": "场景",
+        "iconPath": "static/tabbar/scene.png",
+        "selectedIconPath": "static/tabbar/scene-active.png"
+      },
+      {
+        "pagePath": "pages/algo/index",
+        "text": "算法",
+        "iconPath": "static/tabbar/algo.png",
+        "selectedIconPath": "static/tabbar/algo-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "static/tabbar/profile.png",
+        "selectedIconPath": "static/tabbar/profile-active.png"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  }
+}
