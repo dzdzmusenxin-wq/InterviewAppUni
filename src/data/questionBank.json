@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "importTime": "2024-01-15T10:00:00Z",
+  "categories": [
+    {
+      "id": "cat_js",
+      "name": "JavaScript",
+      "icon": "📦",
+      "parentId": null,
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "id": "cat_ts",
+      "name": "TypeScript",
+      "icon": "📘",
+      "parentId": null,
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "id": "cat_vue",
+      "name": "Vue.js",
+      "icon": "💚",
+      "parentId": null,
+      "sortOrder": 3,
+      "enabled": true
+    },
+    {
+      "id": "cat_react",
+      "name": "React",
+      "icon": "⚛️",
+      "parentId": null,
+      "sortOrder": 4,
+      "enabled": true
+    },
+    {
+      "id": "cat_network",
+      "name": "网络基础",
+      "icon": "🌐",
+      "parentId": null,
+      "sortOrder": 5,
+      "enabled": true
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_js_001",
+      "categoryId": "cat_js",
+      "difficulty": "easy",
+      "content": "JavaScript 中如何实现数组扁平化？",
+      "answer": "Array.prototype.flat() 方法可以指定展开深度，默认值为1。\n\n例如：\nconst arr = [1, [2, [3, [4]]]];\narr.flat() 返回 [1, 2, [3, [4]]]\narr.flat(2) 返回 [1, 2, 3, [4]]\n\n对于深层嵌套，可以使用 Infinity 作为深度值：\narr.flat(Infinity) 返回 [1, 2, 3, 4]",
+      "tags": ["数组", "高级方法"],
+      "notes": "注意：flat() 会跳过空位。\n例如：[1, 2, , 4].flat() 返回 [1, 2, 4]",
+      "advanced": "替代方案：使用 reduce + concat\nconst flatten = (arr) => arr.reduce((acc, val) =>\n  Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []\n);",
+      "scenarios": "1. 处理后端返回的多维数组数据\n2. 树形组件的数据处理\n3. 数组拍平用于图表数据准备",
+      "enabled": true,
+      "createdAt": "2024-01-15T09:00:00Z",
+      "updatedAt": "2024-01-15T09:00:00Z"
+    },
+    {
+      "id": "q_js_002",
+      "categoryId": "cat_js",
+      "difficulty": "medium",
+      "content": "解释 JavaScript 中的事件循环机制",
+      "answer": "事件循环是 JavaScript 处理异步操作的机制：\n\n1. 调用栈：执行同步代码\n2. 任务队列：存放异步任务回调\n3. 微任务队列：Promise.then、MutationObserver\n4. 宏任务队列：setTimeout、setInterval、I/O\n\n执行顺序：调用栈 → 微任务队列 → 宏任务队列\n\n例如：\nconsole.log(1);\nsetTimeout(() => console.log(2), 0);\nPromise.resolve().then(() => console.log(3));\nconsole.log(4);\n// 输出: 1, 4, 3, 2",
+      "tags": ["异步编程", "事件循环", "核心概念"],
+      "notes": "微任务（如 Promise.then）会在当前宏任务执行完毕后、下一个宏任务开始前执行。",
+      "advanced": "Node.js 中的事件循环分为多个阶段：\ntimers → pending callbacks → idle, prepare → poll → check → close callbacks\n\nprocess.nextTick() 的优先级高于 Promise.then()",
+      "scenarios": "1. 理解页面渲染时机\n2. 避免回调地狱\n3. 合理安排异步任务的执行顺序",
+      "enabled": true,
+      "createdAt": "2024-01-15T09:15:00Z",
+      "updatedAt": "2024-01-15T09:15:00Z"
+    },
+    {
+      "id": "q_ts_001",
+      "categoryId": "cat_ts",
+      "difficulty": "medium",
+      "content": "TypeScript 中 interface 和 type 有什么区别？",
+      "answer": "共同点：\n- 都可以描述对象结构\n- 都支持继承\n\n区别：\n- 扩展方式：interface 用 extends，type 用交叉类型 &\n- 声明合并：interface 支持，type 不支持\n- 描述基本类型：只有 type 可以\n\n例如：\ninterface 可以声明合并：\ninterface A { x: number }\ninterface A { y: string } // OK，A 现在有 x 和 y\n\ntype 可以描述联合类型：\ntype ID = number | string;",
+      "tags": ["类型系统", "基础概念"],
+      "notes": "大多数情况下两者可以互换，选择时考虑：\n- 需要声明合并用 interface\n- 需要描述基本类型用 type",
+      "advanced": "在复杂类型场景中，type 更灵活：\ntype ExtractPromise<T> = T extends Promise<infer R> ? R : T;\ntype DeepReadonly<T> = { readonly [P in keyof T]: DeepReadonly<T>[P] };",
+      "scenarios": "1. 库的类型定义（多用 interface）\n2. 复杂类型运算（用 type）\n3. 跨文件类型扩展",
+      "enabled": true,
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "q_vue_001",
+      "categoryId": "cat_vue",
+      "difficulty": "easy",
+      "content": "Vue 3 中的组合式 API 相比选项式 API 有什么优势？",
+      "answer": "组合式 API（Composition API）优势：\n\n1. 更好的逻辑复用\n   - 替代 Mixins，避免命名冲突\n   - 使用 composables 函数复用逻辑\n\n2. 更灵活的代码组织\n   - 相关逻辑可以放在一起\n   - 不再受限于选项分组\n\n3. 更好的 TypeScript 支持\n   - 天然支持类型推导\n   - 无需 this 绑定\n\n例如：\nfunction useCounter() {\n  const count = ref(0)\n  const increment = () => count.value++\n  return { count, increment }\n}\n\n// 组件中使用\nconst { count, increment } = useCounter()",
+      "tags": ["Vue3", "组合式API", "进阶"],
+      "notes": "setup() 是组合式 API 的入口，在 beforeCreate 之前执行。",
+      "advanced": "配合 script setup 语法糖，代码更简洁：\n[script setup]\nimport { ref, computed } from vue\nconst count = ref(0)\nconst doubled = computed(() => count.value * 2)\n[/script]",
+      "scenarios": "1. 大型项目的代码组织\n2. 跨组件逻辑复用\n3. 复杂业务逻辑的封装",
+      "enabled": true,
+      "createdAt": "2024-01-15T11:00:00Z",
+      "updatedAt": "2024-01-15T11:00:00Z"
+    },
+    {
+      "id": "q_net_001",
+      "categoryId": "cat_network",
+      "difficulty": "easy",
+      "content": "HTTP 状态码 301 和 302 有什么区别？",
+      "answer": "301 Moved Permanently（永久重定向）：\n- 请求的资源已永久移动到新位置\n- 搜索引擎会更新索引\n- 浏览器会缓存重定向\n- 后续请求直接访问新地址\n\n302 Found（临时重定向）：\n- 资源临时移动到新位置\n- 搜索引擎不会更新链接\n- 浏览器不会缓存\n- 用于登录验证、AB测试等场景\n\n应用举例：\n301: 域名从 http 迁移到 https\n302: 负载均衡时的临时分发",
+      "tags": ["HTTP", "网络基础", "状态码"],
+      "notes": "注意：部分浏览器错误地将 302 当作 301 处理。\n\nSPA 单页应用推荐使用 302 或 307。",
+      "advanced": "还有 307 Temporary Redirect 和 308 Permanent Redirect：\n- 307 保持请求方法不变（302 可能将 POST 转为 GET）\n- 308 类似于 301，保持请求方法不变",
+      "scenarios": "1. 网站 HTTPS 改造（301）\n2. 负载均衡器分发请求（302）\n3. 用户登录后跳转（302）\n4. 临时维护页面",
+      "enabled": true,
+      "createdAt": "2024-01-15T12:00:00Z",
+      "updatedAt": "2024-01-15T12:00:00Z"
+    }
+  ]
+}

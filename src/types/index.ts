@@ -224,6 +224,198 @@ export interface DailyRecommendation {
 }
 
 // ============================================
+// 题库相关类型
+// ============================================
+
+/**
+ * 题库分类
+ */
+export interface QuestionCategory {
+  /** 分类ID */
+  id: string;
+  /** 分类名称 */
+  name: string;
+  /** 分类图标 */
+  icon: string;
+  /** 父分类ID（可选） */
+  parentId?: string;
+  /** 排序顺序 */
+  sortOrder: number;
+  /** 是否启用 */
+  enabled: boolean;
+}
+
+/**
+ * 题库题目（新的数据库模型 - 支持富文本和代码片段）
+ */
+export interface QuestionBankItem {
+  /** 题目ID */
+  id: string;
+  /** 父级ID（用于追问等关联） */
+  parentId?: string;
+  /** 所属分类 */
+  categoryId: string;
+  /** 题目难度 */
+  difficulty: Difficulty;
+  /** 题目内容（支持富文本） */
+  content: string;
+  /** 回答内容（富文本格式，可能包含代码片段） */
+  answer: string;
+  /** 标签列表 */
+  tags: string[];
+  /** 注意事项（富文本格式，可能包含代码片段） */
+  notes: string;
+  /** 进阶理解（富文本格式，可能包含代码片段） */
+  advanced: string;
+  /** 常见应用场景（富文本格式，可能包含代码片段） */
+  scenarios: string;
+  /** 是否启用 */
+  enabled: boolean;
+  /** 创建时间 */
+  createdAt: string;
+  /** 更新时间 */
+  updatedAt: string;
+}
+
+/**
+ * 题库导入文件格式
+ */
+export interface QuestionBankImport {
+  /** 文件版本 */
+  version: string;
+  /** 导入时间 */
+  importTime: string;
+  /** 分类列表 */
+  categories: QuestionCategory[];
+  /** 题目列表 */
+  questions: QuestionBankItem[];
+}
+
+// ============================================
+// 用户相关类型
+// ============================================
+
+/**
+ * 用户信息
+ */
+export interface User {
+  /** 用户ID */
+  id: string;
+  /** 用户昵称 */
+  nickname: string;
+  /** 用户头像 */
+  avatar: string;
+  /** 个人简介 */
+  bio: string;
+  /** 创建时间 */
+  createdAt: string;
+  /** 更新时间 */
+  updatedAt: string;
+}
+
+/**
+ * 学习记录
+ */
+export interface StudyRecord {
+  /** 记录ID */
+  id: string;
+  /** 题目ID */
+  questionId: string;
+  /** 学习状态 */
+  status: 'not_started' | 'learning' | 'completed' | 'mastered';
+  /** 学习次数 */
+  studyCount: number;
+  /** 最后学习时间 */
+  lastStudyTime: string;
+  /** 自定义笔记 */
+  notes: string;
+  /** 创建时间 */
+  createdAt: string;
+  /** 更新时间 */
+  updatedAt: string;
+}
+
+/**
+ * 学习统计记录（用于学习时长等统计）
+ */
+export interface StudyStatsRecord {
+  /** 记录ID */
+  id: string;
+  /** 日期 */
+  date: string;
+  /** 学习时长（分钟） */
+  duration: number;
+  /** 完成题目数 */
+  completedCount: number;
+  /** 是否正确 */
+  isCorrect: boolean;
+}
+
+/**
+ * 收藏
+ */
+export interface Favorite {
+  /** 收藏ID */
+  id: string;
+  /** 关联类型：question | article */
+  type: 'question' | 'article';
+  /** 关联ID */
+  targetId: string;
+  /** 备注 */
+  remark: string;
+  /** 创建时间 */
+  createdAt: string;
+}
+
+/**
+ * 评论
+ */
+export interface AppComment {
+  /** 评论ID */
+  id: string;
+  /** 评论内容 */
+  content: string;
+  /** 关联类型：question | article */
+  targetType: 'question' | 'article';
+  /** 关联ID */
+  targetId: string;
+  /** 父评论ID（用于回复） */
+  parentId?: string;
+  /** 点赞数 */
+  likes: number;
+  /** 创建时间 */
+  createdAt: string;
+}
+
+/**
+ * 学习统计
+ */
+export interface StudyStats {
+  /** 总题目数 */
+  totalQuestions: number;
+  /** 已学习题目数 */
+  studiedQuestions: number;
+  /** 已掌握题目数 */
+  masteredQuestions: number;
+  /** 连续学习天数 */
+  streakDays: number;
+  /** 累计学习时长（分钟） */
+  totalStudyMinutes: number;
+}
+
+/**
+ * 搜索历史
+ */
+export interface SearchHistory {
+  /** 记录ID */
+  id: string;
+  /** 搜索关键词 */
+  keyword: string;
+  /** 搜索时间 */
+  searchedAt: string;
+}
+
+// ============================================
 // 辅助类型
 // ============================================
 
@@ -241,22 +433,6 @@ export interface ModuleConfig {
   color: string;
   /** 题目数量 */
   questionCount: number;
-}
-
-/**
- * 学习记录
- */
-export interface StudyRecord {
-  /** 记录ID */
-  id: string;
-  /** 日期 */
-  date: string;
-  /** 学习时长（分钟） */
-  duration: number;
-  /** 完成题目数 */
-  completedCount: number;
-  /** 是否正确 */
-  isCorrect: boolean;
 }
 
 /**

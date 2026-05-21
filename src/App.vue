@@ -22,4 +22,10 @@ page {
   background-color: $bg;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
+
+/* tabBar 安全区域适配 */
+.tab-bar {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 </style>

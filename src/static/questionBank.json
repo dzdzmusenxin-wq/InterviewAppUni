@@ -1,0 +1,214 @@
+{
+  "version": "1.0.0",
+  "importTime": "2024-01-15T10:00:00Z",
+  "categories": [
+    {
+      "id": "cat_js",
+      "name": "示例数据-JavaScript",
+      "icon": "📦",
+      "parentId": null,
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "id": "cat_ts",
+      "name": "示例数据-TypeScript",
+      "icon": "📘",
+      "parentId": null,
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "id": "cat_vue",
+      "name": "示例数据-Vue.js",
+      "icon": "💚",
+      "parentId": null,
+      "sortOrder": 3,
+      "enabled": true
+    },
+    {
+      "id": "cat_react",
+      "name": "示例数据-React",
+      "icon": "⚛️",
+      "parentId": null,
+      "sortOrder": 4,
+      "enabled": true
+    },
+    {
+      "id": "cat_network",
+      "name": "示例数据-网络基础",
+      "icon": "🌐",
+      "parentId": null,
+      "sortOrder": 5,
+      "enabled": true
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_js_001",
+      "categoryId": "cat_js",
+      "type": "single",
+      "difficulty": "easy",
+      "content": "[示例数据] 以下哪个方法可以将数组的所有元素连接成一个字符串？",
+      "options": [
+        {"key": "A", "content": "concat()", "isCorrect": false},
+        {"key": "B", "content": "join()", "isCorrect": true},
+        {"key": "C", "content": "push()", "isCorrect": false},
+        {"key": "D", "content": "pop()", "isCorrect": false}
+      ],
+      "answer": "B",
+      "analysis": "join() 方法将数组中的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个元素，那么将返回该元素而不使用分隔符。",
+      "tags": ["数组", "方法"],
+      "source": "MDN",
+      "enabled": true,
+      "createdAt": "2024-01-15T09:00:00Z",
+      "updatedAt": "2024-01-15T09:00:00Z"
+    },
+    {
+      "id": "q_js_002",
+      "categoryId": "cat_js",
+      "type": "single",
+      "difficulty": "medium",
+      "content": "[示例数据] 下面代码的输出结果是什么？\nconsole.log(typeof null)",
+      "options": [
+        {"key": "A", "content": "\"null\"", "isCorrect": false},
+        {"key": "B", "content": "\"undefined\"", "isCorrect": false},
+        {"key": "C", "content": "\"object\"", "isCorrect": true},
+        {"key": "D", "content": "\"number\"", "isCorrect": false}
+      ],
+      "answer": "C",
+      "analysis": "这是 JavaScript 的一个历史遗留 bug。typeof null 返回 \"object\"，这是因为在 JavaScript 最初的实现中，null 被认为是一个空的对象引用。",
+      "tags": ["typeof", "null", "bug"],
+      "source": "JavaScript高级程序设计",
+      "enabled": true,
+      "createdAt": "2024-01-15T09:15:00Z",
+      "updatedAt": "2024-01-15T09:15:00Z"
+    },
+    {
+      "id": "q_js_003",
+      "categoryId": "cat_js",
+      "type": "judge",
+      "difficulty": "easy",
+      "content": "[示例数据] JavaScript 中的 const 声明的变量，其值永远不能被修改。",
+      "options": [
+        {"key": "A", "content": "正确", "isCorrect": false},
+        {"key": "B", "content": "错误", "isCorrect": true}
+      ],
+      "answer": "B",
+      "analysis": "const 声明创建一个只读的引用。这意味着变量本身不能被重新赋值，但如果变量是对象或数组，其内部属性或元素仍然可以被修改。",
+      "tags": ["const", "变量声明"],
+      "source": "ECMAScript规范",
+      "enabled": true,
+      "createdAt": "2024-01-15T09:30:00Z",
+      "updatedAt": "2024-01-15T09:30:00Z"
+    },
+    {
+      "id": "q_ts_001",
+      "categoryId": "cat_ts",
+      "type": "single",
+      "difficulty": "medium",
+      "content": "[示例数据] TypeScript 中，interface 和 type 哪个可以被继承？",
+      "options": [
+        {"key": "A", "content": "只有 interface", "isCorrect": false},
+        {"key": "B", "content": "只有 type", "isCorrect": false},
+        {"key": "C", "content": "两者都可以", "isCorrect": true},
+        {"key": "D", "content": "两者都不可以", "isCorrect": false}
+      ],
+      "answer": "C",
+      "analysis": "interface 可以通过 extends 继承，type 可以通过交叉类型（&）实现类似继承的效果。两者都能实现类型的组合和扩展。",
+      "tags": ["interface", "type", "继承"],
+      "source": "TypeScript官方文档",
+      "enabled": true,
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "q_ts_002",
+      "categoryId": "cat_ts",
+      "type": "multiple",
+      "difficulty": "hard",
+      "content": "[示例数据] 以下哪些是 TypeScript 中的泛型约束方式？",
+      "options": [
+        {"key": "A", "content": "extends 关键字", "isCorrect": true},
+        {"key": "B", "content": "implements 关键字", "isCorrect": false},
+        {"key": "C", "content": "keyof 操作符", "isCorrect": true},
+        {"key": "D", "content": "typeof 操作符", "isCorrect": false}
+      ],
+      "answer": "AC",
+      "analysis": "泛型约束主要通过 extends 关键字实现，可以约束泛型必须满足特定接口或类型。keyof 操作符可以获取类型的所有键名，常用于创建更精确的泛型约束。",
+      "tags": ["泛型", "约束", "extends"],
+      "source": "TypeScript深入理解",
+      "enabled": true,
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "q_vue_001",
+      "categoryId": "cat_vue",
+      "type": "single",
+      "difficulty": "easy",
+      "content": "[示例数据] Vue 3 中，以下哪个是组合式 API 的核心函数？",
+      "options": [
+        {"key": "A", "content": "data()", "isCorrect": false},
+        {"key": "B", "content": "setup()", "isCorrect": true},
+        {"key": "C", "content": "mounted()", "isCorrect": false},
+        {"key": "D", "content": "created()", "isCorrect": false}
+      ],
+      "answer": "B",
+      "analysis": "setup() 是组合式 API 的入口函数，在组件创建之前执行。所有的组合式 API 函数（如 ref、reactive、computed 等）都在 setup() 中使用。",
+      "tags": ["Vue3", "组合式API", "setup"],
+      "source": "Vue官方文档",
+      "enabled": true,
+      "createdAt": "2024-01-15T11:00:00Z",
+      "updatedAt": "2024-01-15T11:00:00Z"
+    },
+    {
+      "id": "q_react_001",
+      "categoryId": "cat_react",
+      "type": "single",
+      "difficulty": "medium",
+      "content": "[示例数据] React 中，useEffect 的依赖数组为空数组 [] 时，effect 何时执行？",
+      "options": [
+        {"key": "A", "content": "每次渲染都执行", "isCorrect": false},
+        {"key": "B", "content": "只在组件挂载时执行一次", "isCorrect": true},
+        {"key": "C", "content": "只在组件卸载时执行", "isCorrect": false},
+        {"key": "D", "content": "永远不执行", "isCorrect": false}
+      ],
+      "answer": "B",
+      "analysis": "当 useEffect 的依赖数组为空数组时，effect 只在组件挂载时执行一次，类似于 componentDidMount 的行为。清理函数只在组件卸载时执行。",
+      "tags": ["React", "hooks", "useEffect"],
+      "source": "React官方文档",
+      "enabled": true,
+      "createdAt": "2024-01-15T11:30:00Z",
+      "updatedAt": "2024-01-15T11:30:00Z"
+    },
+    {
+      "id": "q_net_001",
+      "categoryId": "cat_network",
+      "type": "fill",
+      "difficulty": "easy",
+      "content": "[示例数据] HTTP 状态码 ____ 表示请求成功且服务器创建了新的资源。",
+      "answer": "201",
+      "analysis": "HTTP 201 Created 状态码表示请求成功且服务器创建了新的资源。通常在 POST 请求成功创建资源后返回。",
+      "tags": ["HTTP", "状态码"],
+      "source": "HTTP权威指南",
+      "enabled": true,
+      "createdAt": "2024-01-15T12:00:00Z",
+      "updatedAt": "2024-01-15T12:00:00Z"
+    },
+    {
+      "id": "q_net_002",
+      "categoryId": "cat_network",
+      "type": "essay",
+      "difficulty": "hard",
+      "content": "[示例数据] 请简述 TCP 三次握手的过程及其目的。",
+      "answer": "TCP三次握手过程：\n1. 客户端发送 SYN 包（SYN=1, seq=x），表示请求建立连接\n2. 服务器收到后回复 SYN+ACK 包（SYN=1, ACK=1, seq=y, ack=x+1），表示同意连接\n3. 客户端发送 ACK 包（ACK=1, seq=x+1, ack=y+1），确认收到服务器的同意\n\n目的：\n- 确认双方的发送和接收能力正常\n- 同步双方的序列号\n- 防止已失效的连接请求报文段突然又传送到了服务端",
+      "analysis": "三次握手是 TCP 建立可靠连接的必要过程，确保通信双方都具备发送和接收数据的能力，并同步初始序列号，为后续的数据传输做好准备。",
+      "tags": ["TCP", "三次握手", "网络协议"],
+      "source": "计算机网络：自顶向下方法",
+      "enabled": true,
+      "createdAt": "2024-01-15T12:30:00Z",
+      "updatedAt": "2024-01-15T12:30:00Z"
+    }
+  ]
+}

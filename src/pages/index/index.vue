@@ -18,8 +18,8 @@
           </view>
         </view>
       </view>
-      <ProgressBar 
-        :progress="todayProgress" 
+      <ProgressBar
+        :progress="todayProgress"
         :height="12"
         color="#FFFFFF"
         class="banner-progress"
@@ -29,8 +29,8 @@
     <!-- 技术模块网格 -->
     <SectionHeader title="技术模块" rightText="查看全部" @rightClick="goToQuestionList" />
     <view class="module-grid">
-      <view 
-        v-for="module in moduleConfig" 
+      <view
+        v-for="module in moduleConfig"
         :key="module.id"
         class="module-card"
         :style="{ borderColor: module.color + '30' }"
@@ -47,10 +47,10 @@
       </view>
     </view>
 
-    <!-- 每日推荐 -->
-    <SectionHeader title="每日推荐" rightText="更多" @rightClick="goToDailyList" />
-    <view 
-      v-for="rec in dailyRecommendations.slice(0, 1)" 
+    <!-- 每日推荐 - 暂时注释 -->
+    <!-- <SectionHeader title="每日推荐" rightText="更多" @rightClick="goToDailyList" />
+    <view
+      v-for="rec in dailyRecommendations.slice(0, 1)"
       :key="rec.id"
       class="daily-card"
       @click="goToDailyDetail(rec)"
@@ -63,30 +63,76 @@
       <text class="daily-desc">{{ rec.description }}</text>
       <view class="daily-footer">
         <view class="daily-tags">
-          <Tag 
-            v-for="tag in rec.tags.slice(0, 2)" 
-            :key="tag" 
-            :text="tag" 
-            size="small" 
+          <Tag
+            v-for="tag in rec.tags.slice(0, 2)"
+            :key="tag"
+            :text="tag"
+            size="small"
           />
         </view>
         <Tag :text="difficultyConfig[rec.difficulty].label" :variant="rec.difficulty" size="small" />
       </view>
-    </view>
+    </view> -->
   </view>
 </template>
 
 <script setup lang="ts">
 /**
  * 首页
- * 学习进度横幅、技术模块2x2网格、每日推荐
+ * 学习进度横幅、技术模块 2x2 网格
  */
-import { computed } from 'vue';
-import { userProfile, moduleConfig, dailyRecommendations, difficultyConfig } from '@/data/mockData';
-import type { TechModule } from '@/types';
+import { ref, computed, onMounted } from 'vue';
+import { userProfile, difficultyConfig } from '@/data/mockData';
+import type { TechModule, ModuleConfig } from '@/types';
+import { QuestionBankService } from '@/services/questionBankService';
+import { getAllCategoriesFromQuestions } from '@/utils/supabase';
 import SectionHeader from '@/components/SectionHeader.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import Tag from '@/components/Tag.vue';
+
+const questionBankService = QuestionBankService.getInstance();
+const moduleConfig = ref<ModuleConfig[]>([]);
+
+const categoryColorMap: Record<string, string> = {
+  cat_javascript: '#F7B731',
+  cat_typescript: '#3867D6',
+  cat_vuejs: '#20BF6B',
+  cat_react: '#61DAFB',
+  'cat_css_样式': '#9B59B6',
+  'cat_性能优化': '#E74C3C',
+  'cat_架构设计': '#34495E',
+  'cat_安全': '#2ECC71',
+  'cat_网络相关': '#3498DB',
+  'cat_算法题': '#E91E63'
+};
+
+onMounted(async () => {
+  await questionBankService.initialize();
+  await loadModulesFromDatabase();
+});
+
+async function loadModulesFromDatabase() {
+  try {
+    // 从 questions 表读取分类数据
+    const categories = await getAllCategoriesFromQuestions();
+    const modules: ModuleConfig[] = [];
+
+    for (const category of categories) {
+      const moduleId = category.id.replace('cat_', '') as TechModule;
+      modules.push({
+        id: moduleId,
+        name: category.name,
+        icon: category.icon,
+        color: categoryColorMap[category.id] || '#666666',
+        questionCount: category.count
+      });
+    }
+
+    moduleConfig.value = modules;
+  } catch (error) {
+    console.error('加载模块失败:', error);
+  }
+}
 
 // 今日学习进度
 const todayProgress = computed(() => {
@@ -94,15 +140,9 @@ const todayProgress = computed(() => {
   return Math.min(todayCompleted / dailyGoal, 1);
 });
 
-// 获取模块图标（emoji映射）
+// 获取模块图标（emoji 映射）
 const getModuleIcon = (icon: string): string => {
-  const iconMap: Record<string, string> = {
-    javascript: '📜',
-    typescript: '🔷',
-    react: '⚛️',
-    vue: '💚',
-  };
-  return iconMap[icon] || '📚';
+  return icon || '📚';
 };
 
 // 跳转到题目列表
@@ -114,24 +154,39 @@ const goToQuestionList = () => {
 
 // 跳转到模块详情
 const goToModule = (moduleId: TechModule) => {
+  console.log('[Home] 点击模块，moduleId:', moduleId);
+  const url = `/pages/sub-pages/question-list?module=${moduleId}`;
+  console.log('[Home] 跳转URL:', url);
+  
   uni.navigateTo({
-    url: `/pages/sub-pages/question-list?module=${moduleId}`,
+    url: url,
+    success: () => {
+      console.log('[Home] 跳转成功');
+    },
+    fail: (err) => {
+      console.error('[Home] 跳转失败:', err);
+      uni.showToast({
+        title: `跳转失败: ${err.errMsg || '未知错误'}`,
+        icon: 'none',
+        duration: 3000
+      });
+    }
   });
 };
 
-// 跳转到每日推荐列表
-const goToDailyList = () => {
-  uni.navigateTo({
-    url: '/pages/sub-pages/daily-detail',
-  });
-};
+// 跳转到每日推荐列表 - 暂时注释
+// const goToDailyList = () => {
+//   uni.navigateTo({
+//     url: '/pages/sub-pages/daily-detail',
+//   });
+// };
 
-// 跳转到每日推荐详情
-const goToDailyDetail = (rec: typeof dailyRecommendations[0]) => {
-  uni.navigateTo({
-    url: `/pages/sub-pages/daily-detail?id=${rec.id}`,
-  });
-};
+// 跳转到每日推荐详情 - 暂时注释
+// const goToDailyDetail = (rec: typeof dailyRecommendations[0]) => {
+//   uni.navigateTo({
+//     url: `/pages/sub-pages/daily-detail?id=${rec.id}`,
+//   });
+// };
 </script>
 
 <style lang="scss" scoped>

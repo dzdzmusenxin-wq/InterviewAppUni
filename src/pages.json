@@ -13,9 +13,21 @@
       }
     },
     {
+      "path": "pages/bank/index",
+      "style": {
+        "navigationBarTitleText": "题库中心"
+      }
+    },
+    {
       "path": "pages/algo/index",
       "style": {
         "navigationBarTitleText": "算法练习"
+      }
+    },
+    {
+      "path": "pages/question-manager/index",
+      "style": {
+        "navigationBarTitleText": "问题管理"
       }
     },
     {
@@ -94,6 +106,12 @@
           "style": {
             "navigationBarTitleText": "个人设置"
           }
+        },
+        {
+          "path": "bank-detail",
+          "style": {
+            "navigationBarTitleText": "题库详情"
+          }
         }
       ]
     }
@@ -106,32 +124,38 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "基础",
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-active.png"
+        "text": "基础"
       },
       {
         "pagePath": "pages/scene/index",
-        "text": "场景",
-        "iconPath": "static/tabbar/scene.png",
-        "selectedIconPath": "static/tabbar/scene-active.png"
+        "text": "场景"
+      },
+      {
+        "pagePath": "pages/bank/index",
+        "text": "题库"
       },
       {
         "pagePath": "pages/algo/index",
-        "text": "算法",
-        "iconPath": "static/tabbar/algo.png",
-        "selectedIconPath": "static/tabbar/algo-active.png"
+        "text": "算法"
       },
       {
         "pagePath": "pages/profile/index",
-        "text": "我的",
-        "iconPath": "static/tabbar/profile.png",
-        "selectedIconPath": "static/tabbar/profile-active.png"
+        "text": "我的"
       }
     ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#FFFFFF"
-  }
+  },
+	"condition" : {
+		"current": 0,
+		"list": [
+			{
+				"name": "",
+				"path": "",
+				"query": ""
+			}
+		]
+	}
 }

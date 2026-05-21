@@ -87,7 +87,7 @@ console.log(counter.getCount());  // 2`,
       },
       {
         question: '如何在循环中正确使用闭包？',
-        answer: '在 ES6 之前，通常使用立即执行函数（IIFE）来创建独立的作用域；ES6 引入 let 和 const 后，它们具有块级作用域，每次迭代都会创建新的绑定，因此可以直接在循环中使用。例如：for (let i = 0; i < 10; i++) { setTimeout(() => console.log(i), 100); } 会正确输出 0-9。',
+        answer: "在 ES6 之前，通常使用立即执行函数（IIFE）来创建独立的作用域；ES6 引入 let 和 const 后，它们具有块级作用域，每次迭代都会创建新的绑定，因此可以直接在循环中使用。例如：for (let i = 0; i < 10; i++) { setTimeout(() => console.log(i), 100); } 会正确输出 0-9。",
       },
     ],
     commentList: [
